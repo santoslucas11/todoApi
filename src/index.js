@@ -82,15 +82,12 @@ app.put('/todos/:id', checksExistsUserAccount, (request, response) => {
 });
 
 app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
-  // Complete aquiconst { user } = request;
-  const { title, deadLine } = request.body;
+  const { user } = request;
   const { id } = request.params;
 
   const todo = user.todos.find(todo => todo.id === id);
 
-
-  todo.title = title;
-  todo.deadLine = new Date(deadLine);
+  todo.done = true;
 
   return response.json(todo);
 });
